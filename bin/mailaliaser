@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'mailaliaser'
+require 'slop'
+
+opts = Slop.parse do |o|
+  o.banner = 'Usage: mailaliaser [options] ...'
+  o.separator 'Generates a unique random email: local-part@domain'
+  o.separator ''
+  o.separator 'Options:'
+
+  o.string '-l', '--local-part', 'the local part of the email address', required: true
+  o.string '-d', '--domain', 'the domain part of the email address', required: true
+  o.bool '-c', '--clipboard', 'copies email address to system clipboard', default: true
+  o.bool '-q', '--quiet', 'suppress output (quiet mode)', default: false
+  o.integer '-n', '--number', 'number of emails to generate', default: 1
+  o.on '-v', '--version', 'print the version' do
+    puts "Mailaliaser version: #{Mailaliaser::VERSION}"
+    puts "Slop version: #{Slop::VERSION}"
+    begin
+      require 'clipboard'
+      puts "Clipboard version: #{Clipboard::VERSION}"
+    rescue LoadError
+      puts 'Clipboard: not installed'
+    end
+    exit
+  end
+  o.on '-h', '--help', 'give this help list' do
+    puts o
+    exit
+  end
+end
+
+generator = Mailaliaser::Generator.new(
+  local_part: opts[:local_part],
+  domain: opts[:domain],
+  number: opts[:number],
+  clipboard: opts[:clipboard],
+  quiet: opts[:quiet]
+)
+
+generator.generate
