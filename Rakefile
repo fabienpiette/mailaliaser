@@ -9,4 +9,4 @@ end
 RuboCop::RakeTask.new
 
 task default: %i[rubocop spec]
-task :bench => :performance
+task bench: :performance

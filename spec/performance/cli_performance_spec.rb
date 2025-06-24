@@ -6,10 +6,9 @@ RSpec.describe 'CLI Performance', :performance do
   let(:bin_path) { File.expand_path('../../bin/mailaliaser', __dir__) }
 
   def run_command_timed(args = '')
-    time = Benchmark.realtime do
+    Benchmark.realtime do
       Open3.capture3("ruby #{bin_path} #{args}")
     end
-    time
   end
 
   def run_command(args = '')
@@ -86,7 +85,7 @@ RSpec.describe 'CLI Performance', :performance do
   describe 'repeated invocations' do
     it 'maintains consistent performance over multiple calls' do
       times = []
-      
+
       10.times do
         times << run_command_timed('-l perf -d test.com --no-clipboard -q')
       end
@@ -101,10 +100,8 @@ RSpec.describe 'CLI Performance', :performance do
     end
 
     it 'generates unique results on rapid calls' do
-      results = []
-      
       5.times do
-        stdout, _, status = run_command('-l rapid -d test.com --no-clipboard -q')
+        _, _, status = run_command('-l rapid -d test.com --no-clipboard -q')
         expect(status.success?).to be true
         # Even in quiet mode, we're not capturing output, but ensuring it succeeds
       end
@@ -117,8 +114,8 @@ RSpec.describe 'CLI Performance', :performance do
   describe 'resource usage' do
     it 'does not consume excessive CPU on large generations' do
       # This is more of a smoke test - ensuring the process completes
-      stdout, stderr, status = run_command('-l cpu -d test.com -n 2000 --no-clipboard -q')
-      
+      _, stderr, status = run_command('-l cpu -d test.com -n 2000 --no-clipboard -q')
+
       expect(status.success?).to be true
       expect(stderr).not_to include('killed')
       expect(stderr).not_to include('memory')

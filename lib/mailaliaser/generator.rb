@@ -10,7 +10,7 @@ module Mailaliaser
 
     def generate
       base_timestamp = (Time.now.to_f * 1000).to_i # Millisecond precision
-      
+
       emails = (1..@number).map do |i|
         "#{@local_part}+#{base_timestamp}#{i}@#{@domain}"
       end
