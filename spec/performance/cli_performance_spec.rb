@@ -51,7 +51,9 @@ RSpec.describe 'CLI Performance', :performance do
 
   describe 'output performance' do
     it 'handles large output efficiently' do
-      stdout, stderr, status = nil
+      stdout = nil
+      stderr = nil
+      status = nil
       time = Benchmark.realtime do
         stdout, stderr, status = run_command('-l perf -d test.com -n 500 --no-clipboard')
       end
