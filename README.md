@@ -1,7 +1,11 @@
-# Mailaliaser
-
-[![CI](https://github.com/fabienpiette/mailaliaser/workflows/CI/badge.svg)](https://github.com/fabienpiette/mailaliaser/actions)
-[![Gem Version](https://badge.fury.io/rb/mailaliaser.svg)](https://badge.fury.io/rb/mailaliaser)
+<div align="center">
+  <img src="mailaliasers_logo.png" alt="Mailaliaser Logo" width="200" height="200">
+  
+  # Mailaliaser
+  
+  [![CI](https://github.com/fabienpiette/mailaliaser/workflows/CI/badge.svg)](https://github.com/fabienpiette/mailaliaser/actions)
+  [![Gem Version](https://badge.fury.io/rb/mailaliaser.svg)](https://badge.fury.io/rb/mailaliaser)
+</div>
 
 A Ruby gem for generating unique email aliases with timestamp-based suffixes. Perfect for testing, temporary accounts, service sign-ups, or organizing email workflows with automatically generated unique variations.
 
