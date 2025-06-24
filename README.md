@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="mailaliasers_logo.png" alt="Mailaliaser Logo" width="200" height="200">
+  <img src="logo.png" alt="Mailaliaser Logo" width="200" height="200">
   
   # Mailaliaser
   
